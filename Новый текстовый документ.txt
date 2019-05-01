@@ -1,0 +1,32 @@
+using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Threading;
+
+namespace Selenium
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--disable-notifications");
+            IWebDriver driver = new ChromeDriver(@"C:\Users\Maks\Downloads\chromedriver_win32", options);
+            driver.Navigate().GoToUrl("http://www.facebook.com");
+
+            driver.FindElement(By.XPath("//input[@id='email']")).SendKeys("Hah! Gotcha!");
+            driver.FindElement(By.XPath("//input[@id='pass']")).SendKeys("its bad to see someone else's password");
+            driver.FindElement(By.XPath("//label[@id='loginbutton']")).Submit();
+            Thread.Sleep(2000);
+            //driver.FindElement(By.XPath("//a[@action='cancel']")).Click();
+            //*[@id="js_5l"]/div[1]/div
+            driver.FindElement(By.XPath("//*[@id='js_5l']/div[1]/div")).Click();
+            Thread.Sleep(500);
+            driver.FindElement(By.XPath("//*[@id='js_5l']/div[1]/div/div[1]/div[2]/div/div/div/div/div/div/div/div/div/div/div/span/span")).SendKeys("Hello to the Future");
+            Thread.Sleep(2000);
+            driver.FindElement(By.XPath("//*[@id='js_28']/div[2]/div[3]/div[2]/div/div/span/button")).Click();
+            Thread.Sleep(2000);
+            
+        }
+    }
+}
